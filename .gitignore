@@ -1,5 +1,7 @@
 secrets.py
 secret.py
+birdbot-env/
+tensorflow-*.whl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

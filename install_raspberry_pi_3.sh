@@ -1,13 +1,17 @@
 #!/bin/bash
 
 # Review https://github.com/lhelontra/tensorflow-on-arm/releases and Download appropriate release
-wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.4.0/tensorflow-2.4.0-cp37-none-linux_armv7l.whl
 
-apt update
-apt -y upgrade
+if [ ! -f tensorflow-2.4.0-cp37-none-linux_armv7l.whl ]
+then
+    wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.4.0/tensorflow-2.4.0-cp37-none-linux_armv7l.whl
+fi
 
-apt install -y apt-file
-apt-file update
+sudo apt update
+sudo apt -y upgrade
+
+sudo apt install -y apt-file
+sudo apt-file update
 # When a python import has a missing file,
 # use apt-file to find which package to install
 #    apt-file file <missing file>
@@ -15,15 +19,15 @@ apt-file update
 #    apt install <missing package>
 
 # Setup Python Package Environment
-apt install -y python3-venv
+sudo apt install -y python3-venv
 python3 -m venv birdbot-env
-source birdbot/bin/activate
+source birdbot-env/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
 
 
-python3 -m pip install numpy=1.19.2        # Required by Tensorflow 2.4.0
-python3 -m pip install multiplotlib=3.3.4  # Version 3.3.x required if using numpy 1.19.2
+python3 -m pip install numpy==1.19.2        # Required by Tensorflow 2.4.0
+python3 -m pip install matplotlib==3.3.4    # Version 3.3.x required if using numpy 1.19.2
 
 # OpenCV Installation
 python3 -m pip install opencv-python-headless
@@ -31,11 +35,11 @@ sudo apt install -y libwebp6 libtiff5 libopenjp2-7 libilmbase23 libopenexr23 lib
 
 # Tensorflow Installation
 # Source: https://raspberrypi.stackexchange.com/questions/107483/error-installing-tensorflow-cannot-find-libhdfs-so
-apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev
+sudo apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev
 python3 -m pip install keras_applications --no-deps
 python3 -m pip install keras_preprocessing --no-deps
 python3 -m pip install h5py
-apt-get install -y openmpi-bin libopenmpi-dev libatlas-base-dev
+sudo apt-get install -y openmpi-bin libopenmpi-dev libatlas-base-dev
 python3 -m pip install six
 python3 -m pip install wheel
 python3 -m pip install mock
