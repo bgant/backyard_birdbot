@@ -10,6 +10,12 @@
 #   cd backyard_birdbot
 #   bash install_raspberry_pi_3.sh
 #
+# It is safe to run install_raspberry_pi_3.sh script multiple times.
+#
+# Remove all pip packages and start over:
+#   rm -r birdbot-env 
+#   bash install_raspberry_pi_3.sh
+#
 # Change Log:
 #   - tensorflow 2.4.0 requires numpy 1.19.x
 #       - matplotlib 3.3.x uses numpy 1.19.x (3.4.x uses 1.20.x)
